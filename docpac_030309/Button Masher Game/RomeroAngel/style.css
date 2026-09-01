@@ -1,11 +1,19 @@
 h1 {
     text-align: center;
+    font-size: xx-large
 }
 
 label {
     text-align: center;
+    font-size: larger;
 }
 
 body {
     text-align: center;
+    font-size: larger;
+    background-color: rgb(162, 72, 247);
+}
+
+div.directionBox {
+    font-size: xx-large;
 }
