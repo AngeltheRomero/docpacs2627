@@ -10,3 +10,19 @@ const countdownInterval = setInterval(() => {
         timerElement.textContent = "YOUR TIME IS UP!!!!!";
     }
 }, 1000);
+
+let currentScore = 0;
+
+const scoreBox = document.getElementById("scoreBox")
+function changeScore(amount) {
+    currentScore += amount;
+}
+
+window.addEventListener('gamepadconnected', function (e) {
+    console.log('Controller connected!', e.gamepad);
+});
+
+function loop() {
+    let gamepad = navigator.getGamepads()[activeGamepadIndex]
+}
+
