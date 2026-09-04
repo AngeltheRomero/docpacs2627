@@ -2,6 +2,11 @@ let score = 0;
 let aWasPressedBefore = false;
 let activeGamepadIndex = null;
 
+let directions = ["up", "down", "left", "right"]
+let requiredDirection = "up";
+
+
+
 window.addEventListener('gamepadconnected', function (e) {
     console.log('Controller connected!', e.gamepad);
     activeGamepadIndex = e.gamepad.index;
@@ -15,31 +20,41 @@ function loop() {
         return;
     }
 
+    let isHoldingCorrectDirection = false;
+
+    if (requiredDirection === "up") {
+        if (gamepad.axes[1] < -0.5) {
+            isHoldingCorrectDirection = true;
+        }
+    }
+
+    if (requiredDirection === "down") {
+        if (gamepad.axes[1] > 0.5) {
+            isHoldingCorrectDirection = true;
+        }
+    }
+
+    if (requiredDirection === "left") {
+        if (gamepad.axes[0] < -0.5) {
+            isHoldingCorrectDirection = true;
+        }
+    }
+
+    if (requiredDirection === "right") {
+        if (gamepad.axes[0] > 0.5) {
+            isHoldingCorrectDirection = true;
+        }
+    }
+
     let aIsPressedNow = gamepad.buttons[0].pressed;
 
 
     console.log('Joystick X:', gamepad.axes[0], 'Joystick Y:', gamepad.axes[1]);
 
-    if (aIsPressedNow && !aWasPressedBefore) {
+    if (aIsPressedNow && !aWasPressedBefore && isHoldingCorrectDirection) {
         score = score + 1;
         let scoreBox = document.getElementById('scoreBox')
         scoreBox.textContent = "Score: " + score;
-    }
-    if (gamepad.axes[0] < -0.5) {
-        console.log('Holding LEFT!');
-    }
-
-    if (gamepad.axes[0] > 0.5) {
-        console.log('Holding RIGHT!');
-    }
-
-    if (gamepad.axes[1] < -0.5) {
-        console.log('Holding UP!');
-    }
-
-
-    if (gamepad.axes[1] > 0.5) {
-        console.log('Holding DOWN!');
     }
 
     aWasPressedBefore = aIsPressedNow;
