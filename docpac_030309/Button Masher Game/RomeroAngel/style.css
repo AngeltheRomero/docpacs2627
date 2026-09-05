@@ -1,8 +1,8 @@
 h1 {
     text-align: center;
     border-radius: 5px;
-    background-color: rgb(156, 0, 0);
-    color: rgb(31, 13, 2);
+    background-color: rgb(50, 183, 216);
+    color: rgb(121, 20, 139);
     font-size: xx-large
 }
 
@@ -13,16 +13,19 @@ label {
 
 body {
     text-align: center;
-    font-size: larger;
-    background-color: rgb(139, 0, 0);
+    font-size: xx-large;
+    background-color: rgb(32, 112, 224);
 }
 
 div.directionBox {
     font-size: xx-large;
 }
 
+div.timeBox {
+    color: red;
+}
+
 div.scoreBox {
     display: flex;
-    border-color: aqua;
     font-size: xx-large;
 }
