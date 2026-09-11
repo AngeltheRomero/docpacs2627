@@ -1,6 +1,13 @@
-document.getElementById("gameCanvas");
+document.getElementById("gameCanvas"); {
+    const gameCanvas = document.getElementById("gameCanvas");
+    const ctx = gameCanvas.getContext("2d");
+}
 
-const c = document.getElementById("myCanvas");
-const ctx = c.getContext("2d");
-
-ctx.fillRect(20, 20, 150, 100);
+class Wall {
+    constructor(x, y, w, h) {
+        this.x = x;
+        this.y = y;
+        this.w = w;
+        this.h = h;
+    }
+}
