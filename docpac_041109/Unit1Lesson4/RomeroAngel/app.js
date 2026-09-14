@@ -42,7 +42,7 @@ const server = http.createServer((req, res) => {
 
         req.on('end', () => {
             const params = new URLSearchParams(body);
-            const name = params.get('userName');
+            const name = params.get('studentName');
 
             res.writeHead(200, { 'Content-Type': 'text/html' });
             res.end(`<h1>Thank you, ${name}!</h1>`);
