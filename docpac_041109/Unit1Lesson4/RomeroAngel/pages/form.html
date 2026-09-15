@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi! I'm doing an HTML FORM!!!!</title>
+    <title>Hi! I'm doing an HTML FORM!!!! For ALL your group planning needs!!!</title>
 </head>
 
 <body>
@@ -12,18 +12,18 @@
 
     <form method="POST" action="/form" id="projectInterestForm">
 
-        <label for="studentName">Name</label>
+        <label for="studentName">Your Name Please!!!</label>
         <input type="text" id="studentName" name="studentName" required>
         <br>
-        <label for="email">Email:</label>
+        <label for="email">School Email Goes Here:</label>
         <input type="email" id="email" name="email" required>
         <br>
-        <label for="number">Number:</label>
+        <label for="number">Number Of The Group!:</label>
         <input type="number" id="number" name="number" min="1" max="4" required>
         <br>
-
+        <br>
         <fieldset>
-            <legend>Choose a prefered project type!!!!!!</legend>
+            <legend>Choose preferred project type!!!!!!</legend>
             <input type="radio" id="website" name="projectType" value="Website" required>
             <label for="website">Let's Make A Website!</label>
             <br>
@@ -36,33 +36,46 @@
 
         <fieldset>
             <legend>Technologies YOU are interested in!!!!</legend>
-            <input type="checkbox" id="HTML&CSS" name="technologies" value="website">
+            <input type="checkbox" id="HTML&CSS" name="technologies" value="htmlcss">
             <label for="HTML&CSS">HTML & CSS!</label>
             <br>
 
-            <input type="checkbox" id="javascript" name="technologies" value="game">
+            <input type="checkbox" id="javascript" name="technologies" value="javascript">
             <label for="javascript">It's Time TO Javascript!!!!</label>
             <br>
 
-            <input type="checkbox" id="Node.js" name="technologies" value="dataApplication">
+            <input type="checkbox" id="Node.js" name="technologies" value="nodejs">
             <label for="Node.js">I'll do the Node.js!!!!</label>
             <br>
 
-            <input type="checkbox" id="databases" name="technologies" value="dataApplication">
+            <input type="checkbox" id="databases" name="technologies" value="database">
             <label for="databases">Let Me Handle The Database!</label>
             <br>
         </fieldset>
-        <!---
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-            <label for="vehicle1"> I have a bike</label><br>\
-            -->
-
-        <button type="submit">Submit</button>
-
-        <p>Here you the need fields to have your name, email and a number between 1-4 for your team! And you prefered
-            technologies you want to do</p>
-
-        <p>Short Explanation: We are making this in order to send user request on our server :D</p>
     </form>
+    <br>
+
+    <form>
+        <label>Choose Your Experience Level!!!!:</label>
+        <select>
+            <option id="Beginner">Beginner</option>
+            <option id="Intermediate">Intermediate</option>
+            <option id="Advanced">Advanced</option>
+        </select>
+    </form>
+
+    <br>
+    <input type="checkbox" id="contactPermission" name="contactPermission" value="yes">
+    <label for="contactPermission">I give consent in terms of contact permission.</label>
+    <br>
+
+    <button type="submit">Submit</button>
+
+    <p>Here you the need fields to have your name, email and a number between 1-4 for your team! And you prefered
+        technologies you want to do</p>
+
+    <p>Short Explanation: We are making this in order to send user request on our server :D</p>
+    </form>
+</body>
 
 </html>
