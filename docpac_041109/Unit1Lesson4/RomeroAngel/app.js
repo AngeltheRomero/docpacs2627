@@ -42,12 +42,17 @@ const server = http.createServer((req, res) => {
 
         req.on('end', () => {
             const params = new URLSearchParams(body);
-            const name = params.get('userName');
+            console.log(params);
+            
+            const name = params.get("userName");
+            const email = params.get("email");
 
             res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(`<h1>Thank you, ${name}!</h1>`);
+            res.end(`<h1>Thank you, ${name} !${email}!</h1>`);
         });
     }
+    
+    
 
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
