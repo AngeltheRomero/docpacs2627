@@ -43,16 +43,28 @@ const server = http.createServer((req, res) => {
         req.on('end', () => {
             const params = new URLSearchParams(body);
             console.log(params);
-            
+
             const name = params.get("userName");
             const email = params.get("email");
 
-            res.writeHead(200, { 'Content-Type': 'text/html' });
-            res.end(`<h1>Thank you, ${name} !${email}!</h1>`);
+            if (!name || name.trim() === '') {
+                res.writeHead(400, { 'Content-Type': 'text/plain' });
+                res.end('Name is required');
+            } else {
+                res.writeHead(200, { 'Content-Type': 'text/html' });
+                res.end(`<h1>Thank you, ${name}!</h1>`);
+            }
         });
     }
-    
-    
+
+    else if (req.url.startsWith('/query') && req.method === 'GET') {
+
+        const url = new URL(req.url, 'http://localhost:3000');
+        const message = url.searchParams.get('message');
+
+        res.writeHead(200, { 'Content-Type': 'text/plain' });
+        res.end('The message is: ' + message);
+    }
 
     else {
         res.writeHead(404, { 'Content-Type': 'text/plain' });
