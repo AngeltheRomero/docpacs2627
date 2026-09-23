@@ -15,3 +15,8 @@ const SWIPE_DISTANCE = 25;
 const TAP_TOLERANCE = 12;
 const PLAYER_WIDTH = 100;
 const PLAYER_HEIGHT = 100;
+
+touchArea.addEventListener('touchstart', (event) => {
+    event.touches[0]
+
+});
