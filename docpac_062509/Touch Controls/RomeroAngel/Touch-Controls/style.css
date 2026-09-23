@@ -11,6 +11,12 @@
 #player {
     position: absolute;
     background-color: firebrick;
-    width: 10px;
-    height: 10px;
+    width: 100px;
+    height: 100px;
+    left: 250px;
+    top: 150px;
+}
+
+body {
+background-color: blueviolet;
 }
