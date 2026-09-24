@@ -6,6 +6,7 @@
     overflow: hidden;
     touch-action: none;
     user-select: none;
+    background-color: black;
 }
 
 #player {
@@ -17,6 +18,16 @@
     top: 150px;
 }
 
+div.touchStatus {
+    font-size: xx-large;
+}
+
 body {
-background-color: blueviolet;
+    background-color: blueviolet;
+}
+
+h1 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: rgb(104, 46, 158);
+
 }
