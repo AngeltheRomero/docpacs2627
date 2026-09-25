@@ -19,16 +19,16 @@ const PLAYER_HEIGHT = 100;
 touchArea.addEventListener('touchstart', (event) => {
     const touch = event.touches[0]
     event.preventDefault();
+    const rect = touchArea.getBoundingClientRect();
+    console.log(rect);
+    touchStatus.textContent = "Viewport X: " + touch.clientX + " | Viewport Y: " + touch.clientY + " | Local X: " + currentX + " | Local Y: " + currentY;
+
     startX = touch.clientX;
     startY = touch.clientY;
     currentX = touch.clientX;
     currentY = touch.clientY;
     touchActive = true;
 
-    touchStatus.textContent = "Event: touchstart | X: " + touch.clientX + " | Y: " + touch.clientY;
-
-    const rect = touchArea.getBoundingClientRect();
-    console.log(rect);
-
-
+    const localX = touch.clientX - rect.left;
+    const localY = touch.clientY - rect.top;
 });
