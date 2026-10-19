@@ -1,0 +1,23 @@
+h1 {
+    text-align: center;
+}
+
+
+body {
+    text-align: center;
+    background-color: aqua;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+button {
+    cursor: default;
+    border-color: rgb(19, 19, 163);
+    padding: 10px;
+    margin: 15px;
+    background-color: red;
+}
+
+.vertical {
+    border-left: 10px solid black;
+    height: 600px;
+}
