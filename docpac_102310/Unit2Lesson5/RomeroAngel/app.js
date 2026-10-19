@@ -25,6 +25,15 @@ app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
 
+
+app.get("/header.ejs", (req, res) => {
+    res.render('views/header.ejs', { });
+});
+
+app.get("/", (req, res) => {
+  res.render("index");
+});
+
 app.use((req, res) => {
     res.status(404).send('404 Page not found');
 });
