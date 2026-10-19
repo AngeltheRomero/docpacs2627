@@ -9,6 +9,8 @@ const pageRouter = require('./routes/pageRoutes');
 const path = require('path');
 const { get } = require('http');
 const app = express();
+// Set EJS as view engine
+app.set('view engine', 'ejs');
 require('dotenv').config();
 console.log(process.env.PORT);
 console.log(process.env.APP_NAME)
