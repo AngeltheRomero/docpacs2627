@@ -29,6 +29,9 @@ app.get("/ejs-demo", (req, res) => {
     res.render("index", { title: "My Page", message: "Welcome!" });
 });
 
+
+
+
 app.use((req, res) => {
     res.status(404).send('404 Page not found');
 });

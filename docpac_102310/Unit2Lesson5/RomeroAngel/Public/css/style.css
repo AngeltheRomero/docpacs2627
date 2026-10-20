@@ -9,6 +9,12 @@ h1 {
     color: rgb(201, 87, 172);
 }
 
+h2 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: chartreuse;
+    font-size: larger;
+}
+
 p {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     color: chartreuse;
