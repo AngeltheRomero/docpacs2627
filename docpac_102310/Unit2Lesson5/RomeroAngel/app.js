@@ -7,7 +7,7 @@ const pageRouter = require('./routes/pageRoutes');
 //... here we can see that these other js files can be seen as our controllers in terms of MVC as they handle the GET and POST 
 // and are what we use to handle submitted forms and the if else these forms need in order to send valid responses
 const path = require('path');
-const { get } = require('http');
+
 const app = express();
 app.set("views", path.join(__dirname, "views"));
 // Set EJS as view engine
@@ -25,13 +25,8 @@ app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
 
-
-app.get("/header.ejs", (req, res) => {
-    res.render('views/header.ejs', { });
-});
-
-app.get("/", (req, res) => {
-  res.render("index");
+app.get("/ejs-demo", (req, res) => {
+    res.render("index", { title: "My Page", message: "Welcome!" });
 });
 
 app.use((req, res) => {
