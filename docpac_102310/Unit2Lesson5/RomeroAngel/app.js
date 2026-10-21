@@ -29,7 +29,7 @@ app.use(pageRouter);
 app.get("/ejs-demo", (req, res) => {
     res.render("index", {
         title: "My Goofy Silly Page",
-        appName: "ExpresinStuff",
+        appName: "ExpressinStuff",
         message: "Welcome!",
         whatIshoulddo: "DO MY WORK!",
         howthepageis: "yeah, its a lesson"
