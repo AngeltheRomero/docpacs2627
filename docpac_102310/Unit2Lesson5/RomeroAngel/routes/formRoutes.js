@@ -1,9 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
+//const path = require('path');
+
+//router.get('/form', (req, res) => {
+//res.sendFile(path.join(__dirname, '..', 'public', 'form.html'));
+//});
 
 router.get('/form', (req, res) => {
-    res.sendFile(path.join(__dirname, '..', 'public', 'form.html'));
+    res.render('form', { title: 'Information Form', message: 'HEY YOU! Please Fill Out My Cool Wicked Radical Superb Form I Made For You!' });
 });
 
 router.post('/form', (req, res) => {

@@ -25,11 +25,16 @@ app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
 
+
 app.get("/ejs-demo", (req, res) => {
-    res.render("index", { title: "My Page", message: "Welcome!" });
+    res.render("index", {
+        title: "My Goofy Silly Page",
+        appName: "ExpresinStuff",
+        message: "Welcome!",
+        whatIshoulddo: "DO MY WORK!",
+        howthepageis: "yeah, its a lesson"
+    });
 });
-
-
 
 
 app.use((req, res) => {
