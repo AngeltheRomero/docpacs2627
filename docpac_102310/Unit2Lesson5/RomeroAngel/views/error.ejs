@@ -1,18 +1,38 @@
 <%- include('partials/header') %>
-
-    <h1>Wow! Wow! Error Spotted!</h1>
-
+    <marquee width="60%" direction="right" height="100px" scrollamount="20">
+        <h1 id="ERROR">Wow! Wow! Error Spotted!</h1>
+    </marquee>
     <b>
-        <p>Description: HEY CAN"T YOU DO IT RIGHT!?!?! Sorry that was rude but your probably here because you either
-            forgot to fill something properly or something that the form doesn't see as valid</p>
-        <p>400 means an error with the form and
-            404 simply means that page your looking for doesn't exist.
+        <p>Description For 400: You made an error to your submission like putting a space in the name which gave you a
+            400</p>
+    </b>
+    <b>
+        <p>Description For 404: So what does this mean to you? Well It means your somewhere a page doesn't exist which
+            is 404.
         </p>
     </b>
 
+    <b>
+        <p>Description For urlparams error: Basically the format for urlparams is the following
+            localhost:PORT/urlparams/YourtextHere, please refer to the buttons below for valid examples.
+        </p>
+    </b>
     <br>
+
+    <h2>Here Are Button To Other Valid Pages</h2>
     <button id="IGottaGetOuttaHere!">
         <a href="/ejs-demo">This Link Takes You Back To A Valid Page!!!</a>
     </button>
-
+    <br>
+    <button id="IGottaGetOuttaHere!">
+        <a href="/form">This Goes To The Form</a>
+    </button>
+    <br>
+    <button id="IGottaGetOuttaHere!">
+        <a href="/urlparams/Example">This Goes To The UrlParams Example</a>
+    </button>
+    <br>
+    <button id="IGottaGetOuttaHere!">
+        <a href="/query?message=Example">This Goes To The A Query String Example</a>
+    </button>
     <%- include('partials/footer') %>

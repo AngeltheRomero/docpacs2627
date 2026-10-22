@@ -15,7 +15,10 @@ router.post('/form', (req, res) => {
     let trimmedName = userName.trim();
 
     if (trimmedName === "") {
-        res.status(400).send('Error 400! There should be no blanks in the name field. Please make sure you fill out the "Your Name Please!" with a name. Please add a name and submit again.');
+        res.status(400).render('error', {
+            title: "400 Error!",
+            message: "You got a 400 error"
+        });
 
     }
     else {

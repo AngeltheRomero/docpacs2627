@@ -39,9 +39,8 @@ app.get("/ejs-demo", (req, res) => {
 
 app.use((req, res) => {
     res.status(404).render('error', {
-        title: "Aha! You Got An Error!",
-        message: "So what does this mean to you? Well It means your somewhere a page doesn't exist or you made an error to your submission"
-
+        title: "404 Error!",
+        message: "You got a 404 error"
     });
 });
 

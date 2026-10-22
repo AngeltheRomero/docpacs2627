@@ -9,14 +9,20 @@ h1 {
     color: rgb(201, 87, 172);
 }
 
+#ERROR {
+    color: rgb(255, 0, 0);
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+
 h2 {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: chartreuse;
+    color: rgb(147, 61, 173);
     font-size: larger;
 }
 
 p {
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: chartreuse;
+    color: rgb(137, 95, 216);
     font-size: larger;
 }
