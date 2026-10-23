@@ -1,0 +1,20 @@
+#Smash {
+    position: absolute;
+    z-index: 9;
+    text-align: center;
+}
+
+#SmashPog {
+    padding: 10px;
+    cursor: move;
+    z-index: 10;
+}
+
+canvas {
+    background-image: url("YourHome!!!!");
+    align-items: center;
+}
+
+#House {
+    align-items: center;
+}

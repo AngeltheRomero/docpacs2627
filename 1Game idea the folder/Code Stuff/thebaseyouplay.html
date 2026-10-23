@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="ohh stylish.css">
+</head>
+
+<body>
+    <h1>This Is An Idea Alright</h1>
+
+    <canvas id="YouPlayHere" width="1850" height="740" style="border:19px solid #f80000;">
+
+        <div style="display:none;">
+            <img id="Hi!ImaPog!" src="Smash Ball Pog.png" width="50" height="50">
+        </div>
+
+    </canvas>
+
+    <button>
+        It's Time To Pog
+    </button>
+</body>
+
+<script>
+    const canvas = document.getElementById("YouPlayHere");
+    const ctx = canvas.getContext("2d");
+    const image = document.getElementById("Hi!ImaPog!");
+
+    image.addEventListener("load", (e) => {
+        ctx.drawImage(image, 10, 10);
+    });
+</script>
+
+
+</html>
