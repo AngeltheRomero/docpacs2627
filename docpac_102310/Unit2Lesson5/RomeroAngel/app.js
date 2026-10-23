@@ -40,7 +40,35 @@ app.get("/ejs-demo", (req, res) => {
 app.use((req, res) => {
     res.status(404).render('error', {
         title: "404 Error!",
-        message: "You got a 404 error"
+        message: "You got a 404 error",
+        statusCode: 404,
+        Linksandstuff: [
+
+            {
+                text: "This Goes To The Form",
+                url: "/form",
+                description: "This button will go to the form page"
+            },
+
+            {
+                text: "This Link Takes You Back To A Valid Page!!!",
+                url: "/ejs-demo",
+                description: "This is for our EJS lesson!"
+            },
+
+
+            {
+                text: "This Goes To The UrlParams Example",
+                url: "/urlparams/Example",
+                description: "Here is a valid use of urlparams"
+            },
+
+            {
+                text: "This Goes To The A Query String Example",
+                url: "/query?message=Example",
+                description: "Here is a valid use of UrlParams"
+            }
+        ]
     });
 });
 

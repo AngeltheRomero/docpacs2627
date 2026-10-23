@@ -3,7 +3,37 @@ const router = express.Router();
 
 router.get('/query', (req, res) => {
     if (!req.query.message || req.query.message.trim() === "") {
-        res.status(400).send('Please provide a message');
+        res.status(400).render('error', {
+            title: "400 Error!",
+            message: "Please provide a message",
+            statusCode: 400,
+            Linksandstuff: [
+                {
+                    text: "This Goes To The Form",
+                    url: "/form",
+                    description: "This button will go to the form page"
+                },
+
+                {
+                    text: "This Link Takes You Back To A Valid Page!!!",
+                    url: "/ejs-demo",
+                    description: "This is for our EJS lesson!"
+                },
+
+
+                {
+                    text: "This Goes To The UrlParams Example",
+                    url: "/urlparams/Example",
+                    description: "Here is a valid use of urlparams"
+                },
+
+                {
+                    text: "This Goes To The A Query String Example",
+                    url: "/query?message=Example",
+                    description: "Here is a valid use of UrlParams"
+                }
+            ]
+        });
     } else {
         res.render('queryResponse', {
             title: "The Query Message will now be recieved!",
@@ -13,9 +43,41 @@ router.get('/query', (req, res) => {
     }
 });
 
+
 router.get('/urlparams/:paramname', (req, res) => {
     if (!req.params.paramname || req.params.paramname.trim() === "") {
-        res.status(400).send("You must send a valid parameter");
+        res.status(400).render('error', {
+            title: "400 Error!",
+            message: "You must send a valid parameter",
+            statusCode: 400,
+            Linksandstuff: [
+                {
+                    text: "This Goes To The Form",
+                    url: "/form",
+                    description: "This button will go to the form page"
+                },
+
+                {
+                    text: "This Link Takes You Back To A Valid Page!!!",
+                    url: "/ejs-demo",
+                    description: "This is for our EJS lesson!"
+                },
+
+
+                {
+                    text: "This Goes To The UrlParams Example",
+                    url: "/urlparams/Example",
+                    description: "Here is a valid use of urlparams"
+                },
+
+                {
+                    text: "This Goes To The A Query String Example",
+                    url: "/query?message=Example",
+                    description: "Here is a valid use of UrlParams"
+                }
+
+            ]
+        });
     } else {
         res.render('parameterResponse', {
             title: "urlparams message is here!",
@@ -26,3 +88,4 @@ router.get('/urlparams/:paramname', (req, res) => {
 });
 
 module.exports = router;
+
