@@ -1,5 +1,6 @@
 const express = require('express');
 const requestLogger = require('./utils/requestLogger.js');
+const Database = require('better-sqlite3');
 //Hi! So from here to...
 const formRouter = require('./routes/formRoutes');
 const parameterRouter = require('./routes/parametersRoutes');
@@ -24,6 +25,7 @@ app.use(express.static('public'));
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
+const db = new Database('TheAWESOMEAWESOMEDataBase');
 
 
 app.get("/ejs-demo", (req, res) => {
