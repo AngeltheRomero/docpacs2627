@@ -1,4 +1,5 @@
 const express = require('express');
+const db = require('./models/database');
 const requestLogger = require('./utils/requestLogger.js');
 //Hi! So from here to...
 const formRouter = require('./routes/formRoutes');
@@ -26,10 +27,6 @@ app.use(express.static('public'));
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
-
-const Database = require('better-sqlite3');
-const db = new Database('TheAWESOMEAWESOMEDataBase.db');
-module.exports = db;
 
 const createTableSQL = `
 CREATE TABLE IF NOT EXISTS whatissubmitted(
