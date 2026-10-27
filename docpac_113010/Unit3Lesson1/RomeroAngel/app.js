@@ -1,6 +1,5 @@
 const express = require('express');
 const requestLogger = require('./utils/requestLogger.js');
-const Database = require('better-sqlite3');
 //Hi! So from here to...
 const formRouter = require('./routes/formRoutes');
 const parameterRouter = require('./routes/parametersRoutes');
@@ -8,6 +7,8 @@ const pageRouter = require('./routes/pageRoutes');
 //... here we can see that these other js files can be seen as our controllers in terms of MVC as they handle the GET and POST 
 // and are what we use to handle submitted forms and the if else these forms need in order to send valid responses
 const path = require('path');
+const { title } = require('process');
+const { DEFAULT_CIPHERS } = require('tls');
 
 const app = express();
 app.set("views", path.join(__dirname, "views"));
@@ -25,8 +26,21 @@ app.use(express.static('public'));
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
-const db = new Database('TheAWESOMEAWESOMEDataBase');
 
+const Database = require('better-sqlite3');
+const db = new Database('TheAWESOMEAWESOMEDataBase.db');
+module.exports = db;
+
+const createTableSQL = `
+CREATE TABLE IF NOT EXISTS whatissubmitted(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    YouSubmittedAForm TEXT,
+    DaSource TEXT,
+    TheTimeStamp TEXT DEFAULT CURRENT_TIMESTAMP
+)
+`;
+db.exec(createTableSQL);
+console.log('Hey!Hey!TheDataBaseWasMade!');
 
 app.get("/ejs-demo", (req, res) => {
     res.render("index", {
@@ -37,7 +51,6 @@ app.get("/ejs-demo", (req, res) => {
         howthepageis: "yeah, its a lesson"
     });
 });
-
 
 app.use((req, res) => {
     res.status(404).render('error', {
