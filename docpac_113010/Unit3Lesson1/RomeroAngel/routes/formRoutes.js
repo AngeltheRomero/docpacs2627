@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { createEntry, getAllEntries } = require('../models/entryModel');
+console.log(getAllEntries());
+
 //const path = require('path');
 
 //router.get('/form', (req, res) => {
@@ -52,10 +55,16 @@ router.post('/form', (req, res) => {
     else {
         console.log('Route was hit!');
         console.log(req.body);
+
+        createEntry(trimmedName, 'form');
+        const entries = getAllEntries();
+        console.log('All entries from database:', entries);
+        
         res.render('formResponse', {
             title: 'The Form You Submitted Is Coming Our Way!',
             message: 'Hey Hey!',
-            userName: trimmedName
+            userName: trimmedName,
+            entries: entries
         });
     }
 });
