@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const { createEntry, getAllEntries } = require('../models/entryModel');
+console.log(getAllEntries());
+
 
 router.get('/query', (req, res) => {
     if (!req.query.message || req.query.message.trim() === "") {
@@ -79,10 +82,16 @@ router.get('/urlparams/:paramname', (req, res) => {
             ]
         });
     } else {
+        const trimmedParam = req.params.paramname.trim();
+        createEntry(trimmedParam, 'urlparams');
+        const entries = getAllEntries();
+        console.log('All entries from database:', entries);
+
         res.render('parameterResponse', {
             title: "urlparams message is here!",
             message: "Hey Hey! Your urlparams message now is:",
-            parameterResponse: req.params.paramname.trim()
+            parameterResponse: trimmedParam,
+            entries: entries
         });
     }
 });

@@ -15,4 +15,16 @@
         <a href="/ejs-demo">This Link Takes You Back To The HomePage!!!</a>
     </button>
 
+    <h2>HEY YOU! Heres your stored data & stuff!!!</h2>
+    <ul>
+      <% entries.forEach(entry => { %> 
+        <ol>
+        ID Of stuff: <%= entry.id %> |
+        These Are Your Values: <%= entry.YouSubmittedAForm %> |
+        Source In Where It Came From: <%= entry.DaSource %> |
+        Time This Was Even Created: <%= entry.TheTimeStamp %>
+</ol>
+<% }); %>
+    </ul>
+
     <%- include('partials/footer') %>
