@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('./data/scores');
+const db = require('./database');
 const requestLogger = require('./utils/requestLogger.js');
 //Hi! So from here to...
 const formRouter = require('./routes/formRoutes');
