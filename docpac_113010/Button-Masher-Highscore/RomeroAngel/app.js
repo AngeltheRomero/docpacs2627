@@ -1,4 +1,5 @@
 const express = require('express');
+<<<<<<< Updated upstream
 const db = require('./database');
 const requestLogger = require('./utils/requestLogger.js');
 //Hi! So from here to...
@@ -7,12 +8,10 @@ const parameterRouter = require('./routes/parametersRoutes');
 const pageRouter = require('./routes/pageRoutes');
 //... here we can see that these other js files can be seen as our controllers in terms of MVC as they handle the GET and POST 
 // and are what we use to handle submitted forms and the if else these forms need in order to send valid responses
+=======
+>>>>>>> Stashed changes
 const path = require('path');
-const { title } = require('process');
-const { DEFAULT_CIPHERS } = require('tls');
-
 const app = express();
-app.set("views", path.join(__dirname, "views"));
 // Set EJS as view engine
 app.set('view engine', 'ejs');
 require('dotenv').config();
@@ -22,12 +21,9 @@ const port = process.env.PORT;
 const apiKey = process.env.API_KEY;
 
 app.use(express.urlencoded({ extended: true }));
-app.use(requestLogger);
+
 app.use(express.static('public'));
-app.use(express.json())
-app.use(formRouter);
-app.use(parameterRouter);
-app.use(pageRouter);
+app.use(express.json());
 
 const createTableSQL = `
 CREATE TABLE IF NOT EXISTS whatissubmitted(
@@ -37,7 +33,7 @@ CREATE TABLE IF NOT EXISTS whatissubmitted(
     TheTimeStamp TEXT DEFAULT CURRENT_TIMESTAMP
 )
 `;
-db.exec(createTableSQL);
+
 console.log('Hey!Hey!TheDataBaseWasMade!');
 
 app.get("/ejs-demo", (req, res) => {
@@ -84,6 +80,7 @@ app.use((req, res) => {
         ]
     });
 });
+
 
 app.listen(port, () => {
     console.log(`${process.env.APP_NAME} is running on http://localhost:${port}`);
