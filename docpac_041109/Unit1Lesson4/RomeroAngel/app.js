@@ -60,7 +60,6 @@ server.listen(PORT, 'localhost', () => {
     console.log(`Server running at http://localhost:${PORT}/`);
 });
 
-
 console.log("Hi again");
 console.log("1990");
 console.log("5 * 2 = 10");
