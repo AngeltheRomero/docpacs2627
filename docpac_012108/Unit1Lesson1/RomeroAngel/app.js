@@ -1,3 +1,4 @@
+require('dotenv').config();
 console.log("Hi again");
 console.log("1990");
 console.log("5 * 2 = 10");
