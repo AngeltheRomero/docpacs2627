@@ -1,28 +1,21 @@
 const express = require("express");
 const sessions = require('express-session');
-app.use(express.urlencoded({ extended: true }));
-require('dotenv').config();
 const app = express();
-// Set EJS as view engine
+// Set EJS as view engine 
 app.set('view engine', 'ejs');
-
-
-
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    res.render("index", {
-        title: "Forum Page",
-        appName: "Hi, this is the Forum Page",
-        "message": "Yeah this is an ejs example page"
-    });
+    res.render("index",
+        {
+            title: "Forum Page",
+            appName: "Hi, this is the Forum Page",
+            message: "This is a ejs page alright"
+        });
 });
 
-
-app.use(express.static("public"));
-express.urlencoded({ extended: false });
-
-app.listen(port, () => {
-    console.log(`${process.env.APP_NAME} is running on http://localhost:${port}`);
-});
-
-
+const PORT = 3000; app.listen(PORT, function (err) {
+    if (err) console.log("Error in server setup")
+    console.log("Server listening on Port", PORT);
+})
