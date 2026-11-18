@@ -1,7 +1,3 @@
-//What Makes this work????
-///Remember! It could an issue with files! 
-// //So Analyze this App.js and compare then your files!
-//Remember to ask for help!
 const express = require('express');
 const sessions = require('express-session');
 const sessionRouter = require('./routes/sessionRoutes');
@@ -15,9 +11,11 @@ const pageRouter = require('./routes/pageRoutes');
 const requestLogger = require('./utils/requestLogger.js');
 //... here we can see that these other js files can be seen as our controllers in terms of MVC as they handle the GET and POST 
 // and are what we use to handle submitted forms and the if else these forms need in order to send valid responses
+const authRoutes = require('./routes/authRoutes.js');
 const path = require('path');
 const { title } = require('process');
 const { DEFAULT_CIPHERS } = require('tls');
+//const { use } = require('react');
 const app = express();
 app.set("views", path.join(__dirname, "views"));
 // Set EJS as view engine
@@ -35,6 +33,8 @@ app.use(sessionRouter);
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
+app.use(authRoutes);
+
 
 const createTableSQL = `
 CREATE TABLE IF NOT EXISTS whatissubmitted(
