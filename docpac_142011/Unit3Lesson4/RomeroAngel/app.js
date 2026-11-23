@@ -29,12 +29,30 @@ app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger);
 app.use(express.static('public'));
 app.use(sessionMiddleware);
+app.use((req, res, next) => {
+    console.log("Middleware running. req.session.user:", req.session.user);
+    if (req.session.user) {
+        const user = req.session.user;
+        res.locals.username = user.username;
+        console.log("Middleware set username to:", res.locals.username);
+        res.locals.isLoggedIn = true;
+        res.locals.email = user.email;
+        res.locals.color = user.color;
+        res.locals.timestamp = user.timestamp;
+    }
+
+    else {
+        res.locals.isLoggedIn = false
+    }
+
+    next();
+});
+
 app.use(sessionRouter);
 app.use(formRouter);
 app.use(parameterRouter);
 app.use(pageRouter);
 app.use(authRoutes);
-
 
 const createTableSQL = `
 CREATE TABLE IF NOT EXISTS whatissubmitted(
