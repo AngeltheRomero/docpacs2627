@@ -1,7 +1,3 @@
-//What Makes this work????
-///Remember! It could an issue with files! 
-// //So Analyze this App.js and compare then your files!
-//Remember to ask for help!
 const express = require('express');
 const sessions = require('express-session');
 const sessionRouter = require('./routes/sessionRoutes');
