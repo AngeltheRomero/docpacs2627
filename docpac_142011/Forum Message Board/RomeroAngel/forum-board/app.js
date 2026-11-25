@@ -1,11 +1,13 @@
 const express = require("express");
-const sessions = require('express-session');
+const bcrypt = require('bcrypt');
+const db = require('./database');
+var session = require('express-session');
 const app = express();
 // Set EJS as view engine 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
-app.use(sessions({
+app.use(session({
     secret: "shushitsasupersecretsecret",
     resave: false,
     saveUninitialized: false,
@@ -17,10 +19,9 @@ app.use(sessions({
 }));
 
 app.use((req, res, next) => {
-    if (req.session.user) {
-        const user = req.session.user;
-        res.locals.username = user.username;
-        res.locals.userId = user.userId;
+    if (req.session.userId && req.session.username) {
+        res.locals.username = req.session.username;
+        res.locals.userId = req.session.userId;
         res.locals.isLoggedIn = true;
     }
 
@@ -42,7 +43,7 @@ app.get('/', (req, res) => {
 
 // GET Register Route
 app.get("/register", (req, res) => {
-    if (req.session.user) {
+    if (req.session.userId) {
         res.redirect("/")
     }
     else {
@@ -54,78 +55,57 @@ app.get("/register", (req, res) => {
     }
 });
 
-// Validate Email
-function validateEmail(email) {
-    const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    return pattern.test(email);
-}
-
 // /POST Register Route
 app.post("/register", (req, res) => {
+    console.log("POST /register hit!");
     const username = req.body.username;
-    const email = req.body.email;
     const password = req.body.password;
-    const PasswordRepeated = req.body.PasswordRepeated;
-
     const trimmedUsername = username.trim();
-    const trimmedEmail = email.trim();
     const trimmedPassword = password.trim();
-    const trimmedPasswordRepeated = PasswordRepeated.trim();
 
     if (trimmedUsername === "" || trimmedPassword === "") {
         res.status(400).render('register', {
             error: "Please Fill All Fields In Order To Make An Account And try Again!"
         });
     }
-    else if (trimmedPassword !== trimmedPasswordRepeated) {
-        res.status(400).render('register', {
-            title: "Invalid Passwords!",
-            message: "Welcoming All New Register! Don't Miss Out And Sign Up!",
-            error: "Please Make Sure Both Passwords Match!"
-        });
-    }
 
-    else if (trimmedUsername.length < 4 || trimmedUsername.length > 30) {
+    else if (trimmedUsername.length < 3 || trimmedUsername.length > 30) {
         res.status(400).render('register', {
             title: "Invalid username!",
             message: "The username provided isn't matched up to our requirements",
-            error: "The username should be between 6 to 30 characters!"
+            error: "The username should be between 3 to 30 characters!"
         });
     }
-    else if (!validateEmail(trimmedEmail)) {
+
+    else if (trimmedPassword.length < 4 || trimmedPassword.length > 30) {
         res.status(400).render('register', {
-            title: "Invalid Email Provided!",
-            message: "This isn't a valid email format we can take! Try again!",
-            error: "The email should be a valid format!"
+            title: "Invalid password!",
+            message: "The password provided isn't matched up to our requirements",
+            error: "Your password should be between 3 to 30 characters!"
         });
     }
 
     else {
-        const thisUserexists = userModel.findByUsername(trimmedUsername);
-        if (thisUserexists) {
+        const checkUserQuery = db.prepare('SELECT id FROM userTable WHERE username = ?');
+        const existingUser = checkUserQuery.get(trimmedUsername);
+
+        if (existingUser) {
             res.status(400).render('register', {
                 title: "Can't Use That Username!",
                 error: "Sorry! But that username is already in use!",
                 message: "No Can Do! That Username Is In Use! Maybe Try Altering Some Things"
             });
         }
-
         else {
-            const thisEmailexists = userModel.findByEmail(trimmedEmail);
-            if (thisEmailexists) {
-                res.status(400).render('register', {
-                    title: "Can't Use That Email!",
-                    error: "Sorry! But that email is already in use!",
-                    message: "That has been used before!"
-                });
-            }
+            const hashedPassword = bcrypt.hashSync(trimmedPassword, 10);
 
-            else {
-                const result = userModel.createuser(trimmedUsername, trimmedPassword);
-                const user = userModel.findById(result.lastInsertRowid);
-                req.session.user = user;
-                res.redirect('/account');
-            }
+            const insertUser = db.prepare('INSERT INTO userTable (username, password_hash) VALUES (?, ?)');
+            const result = insertUser.run(trimmedUsername, hashedPassword);
+
+            req.session.userId = result.lastInsertRowid;
+            req.session.username = trimmedUsername;
+
+            res.redirect("/login");
         }
     }
 });
@@ -161,44 +141,14 @@ app.post("/login", (req, res) => {
             message: "You got a 400 error",
             statusCode: 400,
         });
-    } else {
-        const user = userModel.findByUsername(trimmedUsername);
-        if (!user) {
-            res.status(404).render('login', {
-                title: "This User Is Non-Existant!",
-                message: "Please Try Again! We Can't Find This User!",
-                error: "User Your Looking For Is Non-Existant, Please Try Again",
-                statusCode: 404
-            });
-            return;
-        }
-
-        if (user.password === trimmedPassword) {
-            req.session.user = user;
-            res.redirect("/account");
-        }
-        else {
-            res.status(400).render('login', {
-                title: "Soryy! Wrong Passwords!",
-                message: "The Password Is Incorrect!",
-                error: "The Passwords Don't Match Up Try Again!",
-            });
-            return;
-        }
     }
 });
 
-
 // GET Account Route
 app.get("/account", (req, res) => {
-    if (!req.session.user) {
+    if (!req.session.userId) {
         res.redirect("/login")
     } else {
-        const user = req.session.user;
-        if (!user) {
-            res.redirect("/login");
-            return;
-        }
 
         res.render('account', {
             title: "Here's Your Account!",
@@ -217,7 +167,7 @@ app.post("/logout", (req, res) => {
     });
 });
 
-const PORT = 3120; app.listen(PORT, function (err) {
-    if (err) console.log("Error in server setup")
+const PORT = 4087; app.listen(PORT, function (err) {
+    if (err) console.log("Error in server setup", err)
     console.log("Server listening on Port", PORT);
 });
